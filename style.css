@@ -47,7 +47,7 @@ h1 {
 	cursor: pointer;
 	text-indent: -20em; /*Used to hide cursor*/
 }
-#jarvisform {
+#alfredform {
     text-align: center;
 }
 #speechinput:focus {

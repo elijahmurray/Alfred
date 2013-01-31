@@ -92,11 +92,11 @@
         ?>
         <html>
             <head>
-                <title>Jarvis 2.0</title>
+                <title>Alfred</title>
                 <script>
                     function submitandclear(){
                         if(document.getElementById('speechinput').value != ""){
-                            document.jarvisform.submit();
+                            document.alfredform.submit();
                             document.getElementById('speechinput').value = "";
                         }
                     }
@@ -106,8 +106,8 @@
             </head>
             <body>
                 <div id="container">
-                    <h1>Hello, I'm Jarvis.</h1>
-                    <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
+                    <h1>Hello, I'm Alfred.</h1>
+                    <form method="get" name="alfredform" id="alfredform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
                         <input name="speechinput" id="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
                     </form>
                     <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>

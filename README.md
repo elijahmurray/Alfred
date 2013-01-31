@@ -7,9 +7,9 @@ You need to go to developer.evi.com and sign up for an account there. Even if yo
 
 Also you may need to confirm your email address prior to this working.
 
-You now need to add the domain where you will be hosting the jarvischrome.php file. Add this at the bottom of https://developer.evi.com/api-details#domain-keys
+You now need to add the domain where you will be hosting the index.php file. Add this at the bottom of https://developer.evi.com/api-details#domain-keys
 
-Open jarvischrome.php and edit line 4. Replace the username holder with your DEVELOPER username. Usually api_YOUR-USERNAME. The password will be the one automatically generated that you get via email.
+Open index.php and edit line 4. Replace the username holder with your DEVELOPER username. Usually api_YOUR-USERNAME. The password will be the one automatically generated that you get via email.
 
 You can test if your permissions are working properly by doing a direct query. Put this in your browser (note, replace the username and password)
 
