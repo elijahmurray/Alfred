@@ -18,9 +18,9 @@
         $mytitle = $mytitle.", ";
 
 
-        if(stripos($text,"john")!==FALSE){
-            //Custom commands, based on a specific word identifier          
-        $answer = "My name isn't John you fool";
+        if(stripos($text,("songs" || "music"))!==FALSE){
+            //Custom commands, based on a specific word identifier
+        echo "<iframe src=\"widget.php\">"; //if you say song, it will load my favorite music playlist
         }
         
 // commented out because TK API call wasn't working
@@ -92,7 +92,7 @@
         ?>
         <html>
             <head>
-                <title>.: Jarvis :.</title>
+                <title>Jarvis 2.0</title>
                 <script>
                     function submitandclear(){
                         if(document.getElementById('speechinput').value != ""){
@@ -101,15 +101,18 @@
                         }
                     }
 
-
                 </script>
+                <link rel="stylesheet" href="style.css" />    
             </head>
             <body>
-                <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
-                    <input name="speechinput" id="speechinput" type="text" onFocus="submitandclear(this);" style="width:20px;" x-webkit-speech /><!--input type="submit" value="ASK" /-->
-                </form>
-                <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>
-                
+                <div id="container">
+                    <h1>Hello, I'm Jarvis.</h1>
+
+                    <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
+                        <input name="speechinput" id="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
+                    </form>
+                    <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>
+                </div>
             </body>
         </html>
         <?
