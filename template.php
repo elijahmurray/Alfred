@@ -1,16 +1,26 @@
 <?php 
+
+    $WOLFRAM_APP_ID = ""; # Insert App Id in between quotes
+    $EVI_DEV_USERNAME = ""; # Insert Evi / True Knowledge developer username (usually api_Username) in between quotes
+    $EVI_DEV_PASSWORD = ""; # Insert Evi generated api password in between quotes;
+    $mytitle = "Master Elijah"; #Type whatever you want to be addressed 
+    			 #by in the audio response. Leave blank if you 
+    			 #prefer to not be addressed
+
+
     $stturl = "https://www.google.com/speech-api/v1/recognize?xjerr=1&client=chromium&lang=en-US";
-    $wolframurl = "http://api.wolframalpha.com/v2/query?appid=GEJA3Q-V6X8PAH9VU&format=plaintext&podtitle=Result&input=";
-    $trueknowledgeurl = "https://api.trueknowledge.com/direct_answer/?api_account_id=api_elijahmurray&api_password=Hyperi0n1!&question=";
+    $wolframurl = "http://api.wolframalpha.com/v2/query?appid=".$WOLFRAM_APP_ID."&format=plaintext&podtitle=Result&input=";
+    $trueknowledgeurl = "https://api.trueknowledge.com/direct_answer/?api_account_id=".$EVI_DEV_USERNAME."&api_password=".$EVI_DEV_PASSWORD."&question=";
     $ttsurl = "http://translate.google.com/translate_tts?tl=en&q=";
 
     if(isset($_GET['speechinput'])){
         $text = $_GET['speechinput'];
+        $mytitle = $mytitle.", ";
 
 
-        if(stripos($text,"special")!==FALSE){
-			//Custom commands, based on a specific word identifier        	
-	echo("amas speckksial");
+        if(stripos($text,"john")!==FALSE){
+            //Custom commands, based on a specific word identifier          
+    	$answer = "My name isn't John you fool";
         }
         
 // commented out because TK API call wasn't working
@@ -34,7 +44,7 @@
 //            if($answer = $obj->tk_text_result){
 
 
-                //$answer = "master cranky, ".$answer;
+                //$answer = $mytitle.$answer;
 
 //            }
             else{
@@ -55,10 +65,10 @@
                 $obj = new SimpleXMLElement($contents);
                 $answer = $obj->pod->subpod->plaintext;
                 if(strlen($answer)){
-                    $answer = "master Elijah, ".$answer;
+                    $answer = $mytitle.$answer;
                 }
                 else{
-                    $answer = "sorry, I don't understand";
+                    $answer = $mytitle."sorry, no idea what you're talking about!";
                 }
             }
 
@@ -82,7 +92,7 @@
         ?>
         <html>
             <head>
-                <title>.: Jarvis :.</title>
+                <title>Jarvis 2.0</title>
                 <script>
                     function submitandclear(){
                         if(document.getElementById('speechinput').value != ""){
@@ -96,7 +106,7 @@
             </head>
             <body>
                 <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
-                    <input name="speechinput" id="speechinput" type="text" onFocus="submitandclear(this);" style="width:20px;" x-webkit-speech /><!--input type="submit" value="ASK" /-->
+                    <input name="speechinput" id="speechinput" type="text" onFocus="submitandclear(this);" style="width:20px; background: red;" x-webkit-speech /><!--input type="submit" value="ASK" /-->
                 </form>
                 <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>
                 
@@ -105,9 +115,3 @@
         <?
     }
 ?>
-<style>
-iframe {
-	width: 100%;
-	height: 90%;
-}
-</style>
