@@ -1,6 +1,6 @@
 <?php 
 
-    $WOLFRAM_APP_ID = ""; # Insert App Id in between quotes
+    $WOLFRAM_APP_ID = ""; # GEJA3Q-V6X8PAH9VU Insert App Id in between quotes
     $EVI_DEV_USERNAME = ""; # Insert Evi / True Knowledge developer username (usually api_Username) in between quotes
     $EVI_DEV_PASSWORD = ""; # Insert Evi generated api password in between quotes;
     $mytitle = "Master Elijah"; #Type whatever you want to be addressed 
@@ -15,12 +15,17 @@
 
     if(isset($_GET['speechinput'])){
         $text = $_GET['speechinput'];
+
         $mytitle = $mytitle.", ";
 
-
-        if(stripos($text,("songs" || "music"))!==FALSE){
-            //Custom commands, based on a specific word identifier
-        echo "<iframe src=\"widget.php\">"; //if you say song, it will load my favorite music playlist
+        if(stripos($text,"play")!==FALSE){  # || "start" || "launch" || "open" || "go to"
+            if(stripos($text,"website" || "book")!==FALSE){?>
+                <script type="text/javascript">window.location = "http://www.facebook.com"</script><?php
+            }
+            if(stripos($text,"music")!==FALSE){ # || music
+                //Custom commands, based on a specific word identifier
+            echo "<iframe src=\"widget.php\">"; //if you say song, it will load my favorite music playlist
+            }
         }
         
 // commented out because TK API call wasn't working
@@ -88,7 +93,9 @@
         header('Cache-Control: no-cache');
         print $contents;
     }
+
     else{
+
         ?>
         <html>
             <head>
@@ -111,7 +118,8 @@
                     <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
                         <input name="speechinput" id="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
                     </form>
-                    <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>
+                    <iframe width="0%" height="0" style="border:0px; background:red" src="about:none" name="voiceframe"></iframe>
+                    <div style="position:absolute; left:0; top: 0;"><?php print $text; ?></div>
                 </div>
             </body>
         </html>
