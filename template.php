@@ -101,15 +101,17 @@
                         }
                     }
 
-
                 </script>
+                <link rel="stylesheet" href="style.css" />    
             </head>
             <body>
-                <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
-                    <input name="speechinput" id="speechinput" type="text" onFocus="submitandclear(this);" style="width:20px; background: red;" x-webkit-speech /><!--input type="submit" value="ASK" /-->
-                </form>
-                <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>
-                
+                <div id="container">
+                    <h1>Hello, I'm Jarvis.</h1>
+                    <form method="get" name="jarvisform" id="jarvisform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
+                        <input name="speechinput" id="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
+                    </form>
+                    <iframe width="0px" height="0px" style="border:0px;" src="about:none" name="voiceframe"></iframe>
+                </div>
             </body>
         </html>
         <?
