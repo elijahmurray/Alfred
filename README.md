@@ -30,6 +30,6 @@ Paste the App ID in line 3
 # To Do
 Add favicon
 add launch facebook page
-add typing alternative input
+--add typing alternative input--
 add display output
 add tutorial

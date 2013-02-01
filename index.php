@@ -16,17 +16,27 @@
     if(isset($_GET['speechinput'])){
         $text = $_GET['speechinput'];
 
-        $mytitle = $mytitle.", ";
+        if ($mytitle !="") {
+            $mytitle = $mytitle.", "; //Add pause after title if there is a title.
+        }
 
-        if(stripos($text,"play")!==FALSE){  # || "start" || "launch" || "open" || "go to"
-            if(stripos($text,"website" || "book")!==FALSE){?>
-                <script type="text/javascript">window.location = "http://www.facebook.com"</script><?php
-            }
-            if(stripos($text,"music")!==FALSE){ # || music
+        if(stripos($text,"controlling")!==FALSE){  # || "start" || "launch" || "open" || "go to" 
+            $answer = "Of course not.";
+        }
+
+        elseif(stripos($text,"name")!==FALSE){  # || "start" || "launch" || "open" || "go to" 
+            $answer = "My name is Alfred. Unfortunately I don't have a man's voice yet.";
+        }
+
+        elseif(stripos($text,"apple")!==FALSE){
+            $answer = "Apple can go fuck itself";
+        }
+
+        elseif(stripos($text,"music")!==FALSE){ # || music
                 //Custom commands, based on a specific word identifier
             echo "<iframe src=\"widget.php\">"; //if you say song, it will load my favorite music playlist
             }
-        }
+            
         
 // commented out because TK API call wasn't working
 // Sent support ticket, waiting for update        
@@ -52,7 +62,7 @@
                 //$answer = $mytitle.$answer;
 
 //            }
-            else{
+            else {
                 //$answer = $obj->tk_error_message;
 
 
@@ -106,7 +116,9 @@
                             document.alfredform.submit();
                             document.getElementById('speechinput').value = "";
                         }
+                        
                     }
+
 
                 </script>
                 <link rel="stylesheet" href="style.css" />   
@@ -115,7 +127,13 @@
             <body>
                 <div id="container">
                     <h1>Hello, I'm Alfred.</h1>
-
+                    <h4>...and no, I'm not Siri's boyfriend.</h4>
+                    <script>
+                    $(document).ready(function(){
+                        $("h1").hide().fadeIn(1000);
+                        $("h4").delay(1400).animate({opacity:1.0},1200).delay(3000).slideUp(900);
+                    });
+                    </script>
                     <form method="get" name="alfredform" id="alfredform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe"> <!-- submit form to self -->
                         <input name="speechinput" id="speechinput" class="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
                     </form>
@@ -129,11 +147,13 @@
                             if ($toggle == 0) {
                                 $('.speechinput').toggleClass('typing').focus();
                                 $('#switch-to-type').html('Switch to voice');
+                                $('.speechinput').css({"width": "100px"});
                                 $toggle = ($toggle-1);
                             }
                             else {
                                 $('.speechinput').toggleClass('typing');
                                 $('#switch-to-type').html('Switch to typing');
+                                $('.speechinput').css({"width": "40px"});
                                 $toggle++;
                             }
                         }
@@ -149,7 +169,7 @@
                         });
                     </script>
 
-                    <iframe width="0%" height="0" style="border:0px; background:red" src="about:none" name="voiceframe"></iframe>
+                    <iframe width="0%" height="20%" style="border:0px; background:red" src="about:none" name="voiceframe"></iframe>
                     <div style="position:absolute; left:0; top: 0;"><?php print $text; ?></div>
 
 
