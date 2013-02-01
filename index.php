@@ -6,12 +6,24 @@
     $mytitle = ""; #Type whatever you want to be addressed 
                  #by in the audio response. Leave blank if you 
                  #prefer to not be addressed
+    $accent = "en-gb"; #can take any value from this list
+/*
+These are the accents
+en-us   English (United States)     en-gb   English (United Kingdom)
+en-au   English (Australia)         en-ca   English (Canada)
+en-nz   English (New Zealand)       en-ie   English (Ireland)
+en-za   English (South Africa)      en-jm   English (Jamaica)
+en      English (Caribbean)         en-bz   English (Belize)
+en-tt   English (Trinidad)
 
+These are some default languages. Note, can only take languages that are in Google translate at the moment
+
+*/
 
     $stturl = "https://www.google.com/speech-api/v1/recognize?xjerr=1&client=chromium&lang=en-US";
     $wolframurl = "http://api.wolframalpha.com/v2/query?appid=".$WOLFRAM_APP_ID."&format=plaintext&podtitle=Result&input=";
     $trueknowledgeurl = "https://api.trueknowledge.com/direct_answer/?api_account_id=".$EVI_DEV_USERNAME."&api_password=".$EVI_DEV_PASSWORD."&question=";
-    $ttsurl = "http://translate.google.com/translate_tts?tl=en&q=";
+    $ttsurl = "http://translate.google.com/translate_tts?tl=".$accent."&q=";
 
     if(isset($_GET['speechinput'])){
         $text = $_GET['speechinput'];
@@ -24,8 +36,18 @@
             $answer = "Of course not.";
         }
 
+        elseif(stripos($text,"say")!==FALSE){  
+           
+            if(stripos($text,"name")!==FALSE){ 
+                $answer = "My name is Alfred.";
+            }
+            else {
+                $answer = $text;
+            }
+        }        
+
         elseif(stripos($text,"name")!==FALSE){  # || "start" || "launch" || "open" || "go to" 
-            $answer = "My name is Alfred. Unfortunately I don't have a man's voice yet.";
+            $answer = "My name is Alfred.";
         }
 
         elseif(stripos($text,"apple")!==FALSE){
