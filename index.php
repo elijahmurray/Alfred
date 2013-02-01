@@ -11,10 +11,8 @@
 These are the accents
 en-us   English (United States)     en-gb   English (United Kingdom)
 en-au   English (Australia)         en-ca   English (Canada)
-en-nz   English (New Zealand)       en-ie   English (Ireland)
-en-za   English (South Africa)      en-jm   English (Jamaica)
-en      English (Caribbean)         en-bz   English (Belize)
-en-tt   English (Trinidad)
+en-nz   English (New Zealand)       
+
 
 These are some default languages. Note, can only take languages that are in Google translate at the moment
 
@@ -100,12 +98,17 @@ These are some default languages. Note, can only take languages that are in Goog
                 ob_end_clean();
 //                echo $contents;
                 $obj = new SimpleXMLElement($contents);
-                $answer = $obj->pod->subpod->plaintext;
-                if(strlen($answer)){
-                    $answer = $mytitle.$answer;
+                if (stripos($text,"who is")!==FALSE) { //check to see if we're looking for a person
+                    $answer = "oh poop, it's working!";
                 }
-                else{
-                    $answer = $mytitle."sorry, no idea what you're talking about!";
+                else {
+                    $answer = $obj->pod->subpod->plaintext;
+                    if(strlen($answer)){
+                        $answer = $mytitle.$answer;
+                    }
+                    else{
+                        $answer = $mytitle."sorry, no idea what you're talking about!";
+                    }
                 }
             }
 
