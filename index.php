@@ -3,7 +3,7 @@
     $WOLFRAM_APP_ID = ""; # GEJA3Q-V6X8PAH9VU Insert App Id in between quotes
     $EVI_DEV_USERNAME = ""; # Insert Evi / True Knowledge developer username (usually api_Username) in between quotes
     $EVI_DEV_PASSWORD = ""; # Insert Evi generated api password in between quotes;
-    $mytitle = "Master Elijah"; #Type whatever you want to be addressed 
+    $mytitle = ""; #Type whatever you want to be addressed 
                  #by in the audio response. Leave blank if you 
                  #prefer to not be addressed
 
@@ -109,17 +109,51 @@
                     }
 
                 </script>
-                <link rel="stylesheet" href="style.css" />    
+                <link rel="stylesheet" href="style.css" />   
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> 
             </head>
             <body>
                 <div id="container">
                     <h1>Hello, I'm Alfred.</h1>
 
-                    <form method="get" name="alfredform" id="alfredform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe">
-                        <input name="speechinput" id="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
+                    <form method="get" name="alfredform" id="alfredform" action="<?=$_SERVER['PHP_SELF']?>" target="voiceframe"> <!-- submit form to self -->
+                        <input name="speechinput" id="speechinput" class="speechinput" type="text"  onFocus="submitandclear(this);" x-webkit-speech /><!--input type="submit" value="ASK" /-->
                     </form>
+                     <div id="switch-to-type" onclick="typing()">Switch to typing</div>
+                    
+                    <script>
+                    $toggle = 0; //used in the below function
+
+                        // this function changes back and forth from typing input to speaking input
+                        function typing() {
+                            if ($toggle == 0) {
+                                $('.speechinput').toggleClass('typing').focus();
+                                $('#switch-to-type').html('Switch to voice');
+                                $toggle = ($toggle-1);
+                            }
+                            else {
+                                $('.speechinput').toggleClass('typing');
+                                $('#switch-to-type').html('Switch to typing');
+                                $toggle++;
+                            }
+                        }
+
+                        // Dynamically resize the typing box (when activated) to match the length of the user typed comment
+                        $(document).ready(function(){
+                            $("input").keyup(function(){
+                                contents = $(this).val();
+                                charlength = contents.length;
+                                newwidth = 100 + (charlength*6); //charlength * 6 is the amount of space that is added for each new character
+                                $(this).css({width:newwidth});
+                            });     
+                        });
+                    </script>
+
                     <iframe width="0%" height="0" style="border:0px; background:red" src="about:none" name="voiceframe"></iframe>
                     <div style="position:absolute; left:0; top: 0;"><?php print $text; ?></div>
+
+
+
                 </div>
             </body>
         </html>
