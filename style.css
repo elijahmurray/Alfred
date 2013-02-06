@@ -50,11 +50,12 @@ h4 {
     height: 40px;
     width: 40px;
     background: #CCC;
-    padding-right: 12px;
+    padding-right: 6px;
     border-radius: 27px;
     cursor: pointer;
     text-indent: -20em; /*Used to hide cursor*/
     -webkit-transition: all .3s ease;
+    font-size: 20px;
 }
 .typing {
     padding-right: 12px;
